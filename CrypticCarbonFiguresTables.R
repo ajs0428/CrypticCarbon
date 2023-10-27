@@ -18,8 +18,15 @@ wd = '/Users/Anthony/OneDrive - UW/University of Washington/Data and Modeling'
 #wd = '/Users/ajs0428/OneDrive - UW/University of Washington/Data and Modeling/SOIL CARBON/' 
 figpath <- "/Users/Anthony/OneDrive - UW/University of Washington/Writing and Drafting/Cryptic Carbon/Submission/Revision/"
 
+# Quick R^2 function
+r.sq <- function(y,y.fitted){
+    res <- y-y.fitted
+    1-sum(res^2)/sum((y-mean(y))^2)
+}
+
 hoh_dat <- read.csv("SOIL CARBON/ANALYSIS/CrypticCarbonData_revised/CrypticCarbon_Stocks_Full_Revised.csv") |> 
     dplyr::select(-X)
+
 
 ############## Recoding LITHOL to landtype  ##########################################
 hoh_dat<- hoh_dat  |> mutate(landtype = case_when(WIP >= 0.5 &LITHOL == "alluvium_marine_water" ~ "Riverine",
@@ -186,8 +193,8 @@ pedon_hist <- ggplot(hoh_dat, aes(x = WIP*100)) +
           axis.ticks = element_blank(),
           text = element_text(size = 22))
 
-ggplot2::ggsave(plot = pedon_hist, paste0(figpath, "Figures_Revised/Pedon_WIP_histogram.jpeg"),
-                width = 9, height = 7.5, units = "in")
+ggplot2::ggsave(plot = pedon_hist, paste0(figpath, "Figures_Revised/Pedon_WIP_histogram.jpg"),
+                width = 9, height = 7.5, units = "in", dpi = 500, dpi = 500)
 
 
 #### GRAPH: histogram of map data ####
@@ -216,8 +223,8 @@ WIP_hist_graph <- quick_hist(values_vec = WIP_hist_df*100) +
           axis.ticks = element_blank(),
           text = element_text(size = 22))
 
-ggplot2::ggsave(plot = WIP_hist_graph, paste0(figpath, "Figures_Revised/Map_WIP_histogram.jpeg"),
-                width = 9, height = 7.5, units = "in")
+ggplot2::ggsave(plot = WIP_hist_graph, paste0(figpath, "Figures_Revised/Map_WIP_histogram.jpg"),
+                width = 9, height = 7.5, units = "in", dpi = 500)
 
 ############# Model Figures and Graphs ##########################################
 
@@ -271,9 +278,10 @@ fitact <- ggplot(hoh_dat, aes(y = (fitted(mod))**2, x = (SOC_stock_100))) +
                   panel.grid.major = element_line(colour = "grey80"),
                   axis.ticks = element_blank(),
                   text = element_text(size = 22))
+r.sq(sqrt(hoh_dat$SOC_stock_100), (fitted(mod)))
 
-ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/Predict_vs_Actual_1M.jpeg"),
-                width = 9, height = 7.5, units = "in")
+ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/Predict_vs_Actual_1M.jpg"),
+                width = 9, height = 7.5, units = "in", dpi = 500)
 
 
 #### GRAPH: 30 cm graph ####
@@ -322,8 +330,8 @@ fitact30 <- ggplot(hoh_dat, aes(y = (fitted(mod30))**2, x = (SOC_stock_30))) +
                   axis.ticks = element_blank(),
                   text = element_text(size = 22))
 
-ggplot2::ggsave(plot = fitact30, paste0(figpath, "Figures_Revised/Predict_vs_Actual_30CM.jpeg"),
-                width = 9, height = 7.5, units = "in")
+ggplot2::ggsave(plot = fitact30, paste0(figpath, "Figures_Revised/Predict_vs_Actual_30CM.jpg"),
+                width = 9, height = 7.5, units = "in", dpi = 500)
 
 
 
@@ -492,8 +500,8 @@ loglog_wetsize <- ggplot(polys_df, aes(x = log(area_ha), y = log(extract_stock_S
                           axis.ticks = element_blank(),
                           text = element_text(size = 20))
 
-ggplot2::ggsave(plot = loglog_wetsize, paste0(figpath, "Figures_Revised/WetlandSizeClassSOC.jpeg"),
-                width = 9, height = 6.5, units = "in")
+ggplot2::ggsave(plot = loglog_wetsize, paste0(figpath, "Figures_Revised/WetlandSizeClassSOC.jpg"),
+                width = 9, height = 6.5, units = "in", dpi = 500)
 
 #### TABLE: Cryptic Carbon Polygons and Size class ####
 table64 <- SOC64 |> 

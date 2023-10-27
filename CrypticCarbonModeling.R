@@ -62,9 +62,8 @@ tab_model(mod)
 plot(mod)
 qqPlot(resid(mod))
 
-
-
-r.sq(sqrt(hoh_dat$SOC_stock_100), fitted(mod))
+rsq::rsq.lmm(mod)
+r.sq(sqrt(hoh_dat$SOC_stock_100), fitted(mod)) #actual vs. predicted
 
 #### 30cm summary
 summary(mod30)
@@ -72,6 +71,7 @@ anova(mod30)
 tab_model(mod30)
 plot(mod30)
 qqPlot(resid(mod30))
+rsq::rsq.lmm(mod30)
 r.sq(sqrt(hoh_dat$SOC_stock_30), fitted(mod30))
 
 #### Prediction to raster map KEEP HERE####
