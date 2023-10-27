@@ -172,7 +172,7 @@ mesic_pedons |>
     kable_styling(full_width = F) |>
     column_spec(1, bold = T)
 
-#### pedon histogram ####
+#### GRAPH: pedon histogram ####
 
 pedon_hist <- ggplot(hoh_dat, aes(x = WIP*100)) + 
     geom_histogram(bins = 30, binwidth = 4, color = "black", fill="grey80", boundary = 0) +
@@ -186,7 +186,7 @@ pedon_hist <- ggplot(hoh_dat, aes(x = WIP*100)) +
           axis.ticks = element_blank(),
           text = element_text(size = 22))
 
-ggplot2::ggsave(plot = pedon_hist, paste0(figpath, "Figures_Revised/Pedon_WIP_histogram.png"),
+ggplot2::ggsave(plot = pedon_hist, paste0(figpath, "Figures_Revised/Pedon_WIP_histogram.jpeg"),
                 width = 9, height = 7.5, units = "in")
 
 
@@ -216,7 +216,7 @@ WIP_hist_graph <- quick_hist(values_vec = WIP_hist_df*100) +
           axis.ticks = element_blank(),
           text = element_text(size = 22))
 
-ggplot2::ggsave(plot = WIP_hist_graph, paste0(figpath, "Figures_Revised/Map_WIP_histogram.png"),
+ggplot2::ggsave(plot = WIP_hist_graph, paste0(figpath, "Figures_Revised/Map_WIP_histogram.jpeg"),
                 width = 9, height = 7.5, units = "in")
 
 ############# Model Figures and Graphs ##########################################
@@ -272,7 +272,7 @@ fitact <- ggplot(hoh_dat, aes(y = (fitted(mod))**2, x = (SOC_stock_100))) +
                   axis.ticks = element_blank(),
                   text = element_text(size = 22))
 
-ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/Predict_vs_Actual_1M.png"),
+ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/Predict_vs_Actual_1M.jpeg"),
                 width = 9, height = 7.5, units = "in")
 
 
@@ -322,7 +322,7 @@ fitact30 <- ggplot(hoh_dat, aes(y = (fitted(mod30))**2, x = (SOC_stock_30))) +
                   axis.ticks = element_blank(),
                   text = element_text(size = 22))
 
-ggplot2::ggsave(plot = fitact30, paste0(figpath, "Figures_Revised/Predict_vs_Actual_30CM.png"),
+ggplot2::ggsave(plot = fitact30, paste0(figpath, "Figures_Revised/Predict_vs_Actual_30CM.jpeg"),
                 width = 9, height = 7.5, units = "in")
 
 
@@ -492,7 +492,7 @@ loglog_wetsize <- ggplot(polys_df, aes(x = log(area_ha), y = log(extract_stock_S
                           axis.ticks = element_blank(),
                           text = element_text(size = 20))
 
-ggplot2::ggsave(plot = loglog_wetsize, paste0(figpath, "Figures_Revised/WetlandSizeClassSOC.png"),
+ggplot2::ggsave(plot = loglog_wetsize, paste0(figpath, "Figures_Revised/WetlandSizeClassSOC.jpeg"),
                 width = 9, height = 6.5, units = "in")
 
 #### TABLE: Cryptic Carbon Polygons and Size class ####
