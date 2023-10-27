@@ -42,8 +42,6 @@ mask_func <- function(MNDWI, CARBON, fileName){
     
     CARBON_0 <- mask(CARBON, CARBON_0mask, maskvalues = 1, updatevalue =0)
     CARBON_MNDWI <- mask(CARBON_0, MNDWI_mask, maskvalues = 1, updatevalue = NA)
-    #writeRaster(CARBON_MNDWI, filename = fileName, overwrite = T)
-    #CARBON_MNDWI0 <- rast(fileName)
     return(CARBON_MNDWI)
 }
 
@@ -81,7 +79,6 @@ WIP_hist_graph <- quick_hist(values_vec = WIP_hist) +
 #### Forest Cover ####
 
 GEE_HOHTCCproj <- rast("AGB/HOH/GEE_hohTCC.tif_proj.tif")
-#GEE_HOHTCCproj <- terra::project(GEE_HOHTCC, hoh_WIP, filename = "AGB/HOH/GEE_hohTCC.tif_proj.tif")
 plot(GEE_HOHTCCproj>= 50)
 hist(GEE_HOHTCCproj)
 
