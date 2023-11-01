@@ -29,7 +29,7 @@ hoh_dat <- read.csv("SOIL CARBON/ANALYSIS/CrypticCarbonData_revised/CrypticCarbo
 
 
 
-# Quick R^2 function
+# Quick R^2 function#
 r.sq <- function(y,y.fitted){
     res <- y-y.fitted
     1-sum(res^2)/sum((y-mean(y))^2)

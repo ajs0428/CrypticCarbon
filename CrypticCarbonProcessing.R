@@ -8,7 +8,7 @@ library(RColorBrewer)
 
 setwd('/Users/Anthony/OneDrive - UW/University of Washington/Data and Modeling/')
 
-######## Horizon data #########
+######## Horizon data ##########
 
 hoh_hor <- read.csv("SOIL CARBON/ANALYSIS/CrypticCarbonData_revised/CrypticCarbon_horizon.csv")
 GEO <- rast("SOIL CARBON/SPATIAL LAYERS/SPATIAL_LAYERS_7_11_22/HOH/Hoh_GEO_100k_reclassified.tif")

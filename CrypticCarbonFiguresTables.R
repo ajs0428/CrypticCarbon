@@ -28,7 +28,7 @@ hoh_dat <- read.csv("SOIL CARBON/ANALYSIS/CrypticCarbonData_revised/CrypticCarbo
     dplyr::select(-X)
 
 
-############## Recoding LITHOL to landtype  ##########################################
+############## Recoding LITHOL to landtype  ###########################################
 hoh_dat<- hoh_dat  |> mutate(landtype = case_when(WIP >= 0.5 &LITHOL == "alluvium_marine_water" ~ "Riverine",
                                                   WIP >= 0.5 &LITHOL != "alluvium_marine_water" ~ "Palustrine",
                                                   #WIP < 0.5 &WIP>0.1 &LITHOL != "alluvium_marine_water" ~ "Mesic",
