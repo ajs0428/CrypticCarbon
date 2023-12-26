@@ -253,8 +253,10 @@ PI_trans <- PI |> mutate(fit_t = fit**2,
 #PI_rmse <- sqrt(sum(PI_trans$fit_t - PI_trans$act)**2)
 
 ##### GRAPH: Fit of Predicted vs. Actual ####
+r2_full <- r.sq(sqrt(hoh_dat$SOC_stock_100), (fitted(mod)))
+
 fitact <- ggplot(hoh_dat, aes(y = (fitted(mod))**2, x = (SOC_stock_100))) +
-            geom_point(color='black', position = position_jitter(width = 15, height = 15),  aes(shape= LITHOL,fill = WIP*100),
+            geom_point(color='black', position = "identity",  aes(shape= LITHOL,fill = WIP*100),
                            size = 9, stroke = 1, alpha = 0.8) +
             scale_fill_gradientn(colours = brewer.pal(9, "YlGnBu"), name = "WIP %", n.breaks = 5, limits = c(0, 100)) +
             geom_smooth(aes(y = (fitted(mod))**2, x = (SOC_stock_100)), 
@@ -267,7 +269,21 @@ fitact <- ggplot(hoh_dat, aes(y = (fitted(mod))**2, x = (SOC_stock_100))) +
             #ggplot2::scale_size(name = NULL, breaks = NULL, labels = NULL) +
             xlab(expression('Pedon 1m SOC Stock (MgC ha'^-1*')')) + ylab(expression('Predicted 1m SOC Stock (MgC ha'^-1*')')) +
             geom_abline(intercept = 0, slope = 1, linewidth = 2, linetype = "dashed") +
-            #labs(colour = "Random Effect") +
+            annotate("text", 
+                     label = (expression('R'^2*' = 0.636')),
+                     y = 970, x = 500, size = 4.5, parse = F) + 
+            annotate("text", 
+                    label = "1:1 Line", 
+                     y = 970, x = 100, size = 4.5, parse = F) + 
+            geom_segment(aes(x=10, xend=190, y=930, yend=930), linetype="dashed", linewidth = 1.5) +  
+            annotate("text", 
+                     label = "Model Fit",
+                     y = 870, x = 100, size = 4.5, parse = F) + 
+            geom_segment(aes(x=10, xend=190, y=820, yend=820), linetype="dashed", linewidth = 1.5, col = "#fa3e3e") + 
+            annotate("text", 
+                     label = "95% Prediction\nInterval",
+                     y = 945, x = 300, size = 4.5, parse = F) + 
+            geom_segment(aes(x=210, xend=390, y=885, yend=885), linetype=3, linewidth = 1.5, col = "#1664c9") +  
             #xlim(0, 32) +
             #ylim(0, 32)  +
             guides(guide_legend(byrow = TRUE)) +
@@ -278,11 +294,12 @@ fitact <- ggplot(hoh_dat, aes(y = (fitted(mod))**2, x = (SOC_stock_100))) +
                   panel.grid.major = element_line(colour = "grey80"),
                   axis.ticks = element_blank(),
                   text = element_text(size = 22))
-r.sq(sqrt(hoh_dat$SOC_stock_100), (fitted(mod)))
+fitact
 
-ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/Predict_vs_Actual_1M.jpg"),
+ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/png/Figure 1 Predict_vs_Actual_1M.png"),
                 width = 9, height = 7.5, units = "in", dpi = 500)
-
+ggplot2::ggsave(plot = fitact, paste0(figpath, "Figures_Revised/png/Figure 1 Predict_vs_Actual_1M.pdf"),
+                width = 9, height = 7.5, units = "in", dpi = 500)
 
 #### GRAPH: 30 cm graph ####
 PI30 <- predictInterval(
